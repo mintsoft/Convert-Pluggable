@@ -1,4 +1,5 @@
 use Test::More tests => 58;
+###use Math::Round qw/nearest/;
 
 BEGIN { use_ok('Convert::Pluggable') };
 
@@ -7,170 +8,234 @@ isa_ok($c, 'Convert::Pluggable');
 
 my $result;
 
-$result = $c->convert( { 'factor' => '5', 'fromUnit' => 'oz', 'toUnit' => 'g', 'precision' => '3', } );
-is($result, '141.747', 'OK');
+# fix precision and rounding:
+my $precision = 3;
+my $nearest = '1';
+for my $i (1 .. $precision - 1) {
+    $nearest = '0' . $nearest;
+}
+$nearest = '.' . $nearest;
 
-$result = $c->convert( { 'factor' => '1', 'fromUnit' => 'ton', 'toUnit' => 'long ton', 'precision' => '3', } );
-is($result, '0.893', 'OK');
+$result = $c->convert( { 'factor' => '5', 'from_unit' => 'oz', 'to_unit' => 'g', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '141.747462720417', 'OK');
 
-$result = $c->convert( { 'factor' => '158', 'fromUnit' => 'ounce', 'toUnit' => 'lbm', 'precision' => '3', } );
-is($result, '9.875', 'OK');
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'ton', 'to_unit' => 'long ton', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '0.892858633233845', 'OK');
 
-$result = $c->convert( { 'factor' => '0.111', 'fromUnit' => 'stone', 'toUnit' => 'pound', 'precision' => '3', } );
-is($result, '1.554', 'OK');
+$result = $c->convert( { 'factor' => '158', 'from_unit' => 'ounce', 'to_unit' => 'lbm', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '9.87497760390089', 'OK');
 
-$result = $c->convert( { 'factor' => '3', 'fromUnit' => 'kilogramme', 'toUnit' => 'pound', 'precision' => '3', } );
-is($result, '6.614', 'OK');
+$result = $c->convert( { 'factor' => '0.111', 'from_unit' => 'stone', 'to_unit' => 'pound', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '1.55399859023452', 'OK');
 
-$result = $c->convert( { 'factor' => '1.3', 'fromUnit' => 'tonnes', 'toUnit' => 'ton', 'precision' => '3', } );
-is($result, '1.433', 'OK');
+$result = $c->convert( { 'factor' => '3', 'from_unit' => 'kilogramme', 'to_unit' => 'pound', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '6.61386', 'OK');
 
-$result = $c->convert( { 'factor' => '2', 'fromUnit' => 'tons', 'toUnit' => 'kg', 'precision' => '3', } );
-is($result, '1814.372', 'OK');
+$result = $c->convert( { 'factor' => '1.3', 'from_unit' => 'tonnes', 'to_unit' => 'ton', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '1.433003', 'OK');
 
-$result = $c->convert( { 'factor' => '1', 'fromUnit' => 'ton', 'toUnit' => 'kilos', 'precision' => '3', } );
-is($result, '907.186', 'OK');
+$result = $c->convert( { 'factor' => '2', 'from_unit' => 'tons', 'to_unit' => 'kg', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '1814.37163774256', 'OK');
 
-$result = $c->convert( { 'factor' => '3.9', 'fromUnit' => 'oz', 'toUnit' => 'grams', 'precision' => '3', } );
-is($result, '110.563', 'OK');
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'ton', 'to_unit' => 'kilos', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '907.185818871279', 'OK');
 
-$result = $c->convert( { 'factor' => '2', 'fromUnit' => 'miles', 'toUnit' => 'km', 'precision' => '3', } );
-is($result, '3.219', 'OK');
+$result = $c->convert( { 'factor' => '3.9', 'from_unit' => 'oz', 'to_unit' => 'grams', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '110.563020921925', 'OK');
 
-$result = $c->convert( { 'factor' => '5', 'fromUnit' => 'feet', 'toUnit' => 'in', 'precision' => '3', } );
-is($result, '60.000', 'OK');
+$result = $c->convert( { 'factor' => '2', 'from_unit' => 'miles', 'to_unit' => 'km', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '3.21868899578513', 'OK');
 
-$result = $c->convert( { 'factor' => '0.5', 'fromUnit' => 'nautical mile', 'toUnit' => 'klick', 'precision' => '3', } );
-is($result, '0.926', 'OK');
+$result = $c->convert( { 'factor' => '5', 'from_unit' => 'feet', 'to_unit' => 'in', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '60.000030479999', 'OK');
 
-$result = $c->convert( { 'factor' => '500', 'fromUnit' => 'miles', 'toUnit' => 'metres', 'precision' => '3', } );
-is($result, '804672.249', 'OK');
+$result = $c->convert( { 'factor' => '0.5', 'from_unit' => 'nautical mile', 'to_unit' => 'klick', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '0.925999662936123', 'OK');
 
-$result = $c->convert( { 'factor' => '25', 'fromUnit' => 'cm', 'toUnit' => 'inches', 'precision' => '3', } );
-is($result, '9.843', 'OK');
+$result = $c->convert( { 'factor' => '500', 'from_unit' => 'miles', 'to_unit' => 'metres', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '804672.248946282', 'OK');
 
-$result = $c->convert( { 'factor' => '1760', 'fromUnit' => 'yards', 'toUnit' => 'miles', 'precision' => '3', } );
-is($result, '1.000', 'OK');
+$result = $c->convert( { 'factor' => '25', 'from_unit' => 'cm', 'to_unit' => 'inches', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '9.842525', 'OK');
 
-$result = $c->convert( { 'factor' => '3520', 'fromUnit' => 'yards', 'toUnit' => 'miles', 'precision' => '3', } );
-is($result, '2.000', 'OK');
+$result = $c->convert( { 'factor' => '1760', 'from_unit' => 'yards', 'to_unit' => 'miles', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '1.00000270663216', 'OK');
 
-$result = $c->convert( { 'factor' => '1', 'fromUnit' => 'stone', 'toUnit' => 'lbs', 'precision' => '3', } );
-is($result, '14.000', 'OK');
+$result = $c->convert( { 'factor' => '3520', 'from_unit' => 'yards', 'to_unit' => 'miles', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '2.00000541326433', 'OK');
 
-$result = $c->convert( { 'factor' => '30', 'fromUnit' => 'cm', 'toUnit' => 'in', 'precision' => '3', } );
-is($result, '11.811', 'OK');
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'stone', 'to_unit' => 'lbs', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '13.9999872994101', 'OK');
 
-$result = $c->convert( { 'factor' => '36', 'fromUnit' => 'months', 'toUnit' => 'years', 'precision' => '3', } );
-is($result, '3.000', 'OK');
+$result = $c->convert( { 'factor' => '30', 'from_unit' => 'cm', 'to_unit' => 'in', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '11.81103', 'OK');
 
-$result = $c->convert( { 'factor' => '43200', 'fromUnit' => 'seconds', 'toUnit' => 'hours', 'precision' => '3', } );
-is($result, '12.000', 'OK');
+$result = $c->convert( { 'factor' => '36', 'from_unit' => 'months', 'to_unit' => 'years', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '3.00032876712329', 'OK');
 
-$result = $c->convert( { 'factor' => '4', 'fromUnit' => 'hours', 'toUnit' => 'minutes', 'precision' => '3', } );
-is($result, '240.000', 'OK');
+$result = $c->convert( { 'factor' => '43200', 'from_unit' => 'seconds', 'to_unit' => 'hours', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '12', 'OK');
 
-$result = $c->convert( { 'factor' => '5', 'fromUnit' => 'kelvin', 'toUnit' => 'fahrenheit', 'precision' => '3', } );
-is($result, '-450.670', 'OK');
+$result = $c->convert( { 'factor' => '4', 'from_unit' => 'hours', 'to_unit' => 'minutes', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '240', 'OK');
 
-$result = $c->convert( { 'factor' => '1', 'fromUnit' => 'bar', 'toUnit' => 'pascal', 'precision' => '3', } );
-is($result, '100000.000', 'OK');
+$result = $c->convert( { 'factor' => '5', 'from_unit' => 'kelvin', 'to_unit' => 'fahrenheit', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '-450.67', 'OK');
 
-$result = $c->convert( { 'factor' => '1', 'fromUnit' => 'kilopascal', 'toUnit' => 'psi', 'precision' => '3', } );
-is($result, '0.145', 'OK');
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'bar', 'to_unit' => 'pascal', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '100000', 'OK');
 
-$result = $c->convert( { 'factor' => '1', 'fromUnit' => 'atm', 'toUnit' => 'kpa', 'precision' => '3', } );
-is($result, '101.325', 'OK');
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'kilopascal', 'to_unit' => 'psi', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '0.145036839357197', 'OK');
 
-$result = $c->convert( { 'factor' => '5', 'fromUnit' => 'yrds', 'toUnit' => 'km', 'precision' => '3', } );
-is($result, '0.005', 'OK');
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'atm', 'to_unit' => 'kpa', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '0.00457201378919359', 'OK');
 
-$result = $c->convert( { 'factor' => '12', 'fromUnit' => '"', 'toUnit' => 'cm', 'precision' => '3', } );
-is($result, '30.480', 'OK');
+$result = $c->convert( { 'factor' => '5', 'from_unit' => 'yrds', 'to_unit' => 'km', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '0.005', 'OK');
 
-$result = $c->convert( { 'factor' => '25', 'fromUnit' => 'inches', 'toUnit' => 'feet', 'precision' => '3', } );
-is($result, '2.083', 'OK');
+$result = $c->convert( { 'factor' => '12', 'from_unit' => '"', 'to_unit' => 'cm', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '30.480', 'OK');
 
-$result = $c->convert( { 'factor' => '42', 'fromUnit' => 'kilowatt hours', 'toUnit' => 'joules', 'precision' => '3', } );
-is($result, '151200000.000', 'OK');
+$result = $c->convert( { 'factor' => '25', 'from_unit' => 'inches', 'to_unit' => 'feet', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '2.083', 'OK');
 
-$result = $c->convert( { 'factor' => '2500', 'fromUnit' => 'kcal', 'toUnit' => 'tons of tnt', 'precision' => '3', } );
-is($result, '0.003', 'OK');
+$result = $c->convert( { 'factor' => '42', 'from_unit' => 'kilowatt hours', 'to_unit' => 'joules', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '151200000.000', 'OK');
 
-$result = $c->convert( { 'factor' => '90', 'fromUnit' => 'ps', 'toUnit' => 'watts', 'precision' => '3', } );
-is($result, '66194.888', 'OK');
+$result = $c->convert( { 'factor' => '2500', 'from_unit' => 'kcal', 'to_unit' => 'tons of tnt', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '0.003', 'OK');
 
-$result = $c->convert( { 'factor' => '1', 'fromUnit' => 'gigawatt', 'toUnit' => 'horsepower', 'precision' => '3', } );
-is($result, '1341022.090', 'OK');
+$result = $c->convert( { 'factor' => '90', 'from_unit' => 'ps', 'to_unit' => 'watts', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '66194.888', 'OK');
 
-$result = $c->convert( { 'factor' => '180', 'fromUnit' => 'degrees', 'toUnit' => 'radians', 'precision' => '3', } );
-is($result, '3.142', 'OK');
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'gigawatt', 'to_unit' => 'horsepower', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '1341022.090', 'OK');
 
-$result = $c->convert( { 'factor' => '270', 'fromUnit' => 'degrees', 'toUnit' => 'quadrants', 'precision' => '3', } );
-is($result, '3.000', 'OK');
+$result = $c->convert( { 'factor' => '180', 'from_unit' => 'degrees', 'to_unit' => 'radians', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '3.142', 'OK');
 
-$result = $c->convert( { 'factor' => '180', 'fromUnit' => 'degrees', 'toUnit' => 'grads', 'precision' => '3', } );
-is($result, '200.000', 'OK');
+$result = $c->convert( { 'factor' => '270', 'from_unit' => 'degrees', 'to_unit' => 'quadrants', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '3.000', 'OK');
 
-$result = $c->convert( { 'factor' => '45', 'fromUnit' => 'newtons', 'toUnit' => 'pounds force', 'precision' => '3', } );
-is($result, '10.116', 'OK');
+$result = $c->convert( { 'factor' => '180', 'from_unit' => 'degrees', 'to_unit' => 'grads', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '200.000', 'OK');
 
-$result = $c->convert( { 'factor' => '8', 'fromUnit' => 'poundal', 'toUnit' => 'newtons', 'precision' => '3', } );
-is($result, '1.106', 'OK');
+$result = $c->convert( { 'factor' => '45', 'from_unit' => 'newtons', 'to_unit' => 'pounds force', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '10.116', 'OK');
 
-$result = $c->convert( { 'factor' => '5', 'fromUnit' => 'f', 'toUnit' => 'celsius', 'precision' => '3', } );
-is($result, '-14.985', 'OK');
+$result = $c->convert( { 'factor' => '8', 'from_unit' => 'poundal', 'to_unit' => 'newtons', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '1.106', 'OK');
 
-$result = $c->convert( { 'factor' => '6^2', 'fromUnit' => 'oz', 'toUnit' => 'grams', 'precision' => '3', } );
-is($result, undef, 'OK');
+$result = $c->convert( { 'factor' => '5', 'from_unit' => 'f', 'to_unit' => 'celsius', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '-14.985', 'OK');
 
-$result = $c->convert( { 'factor' => 'NaN', 'fromUnit' => 'oz', 'toUnit' => 'stones', 'precision' => '3', } );
-is($result, undef, 'OK');
+$result = $c->convert( { 'factor' => '6^2', 'from_unit' => 'oz', 'to_unit' => 'grams', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, undef, 'OK');
 
-$result = $c->convert( { 'factor' => '45x10', 'fromUnit' => 'oz', 'toUnit' => 'stones', 'precision' => '3', } );
-is($result, undef, 'OK');
+$result = $c->convert( { 'factor' => 'NaN', 'from_unit' => 'oz', 'to_unit' => 'stones', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, undef, 'OK');
 
-$result = $c->convert( { 'factor' => '-9', 'fromUnit' => 'g', 'toUnit' => 'ozs', 'precision' => '3', } );
-is($result, undef, 'OK');
+$result = $c->convert( { 'factor' => '45x10', 'from_unit' => 'oz', 'to_unit' => 'stones', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, undef, 'OK');
 
-$result = $c->convert( { 'factor' => '5', 'fromUnit' => 'oz', 'toUnit' => 'yards', 'precision' => '3', } );
-is($result, undef, 'OK');
+$result = $c->convert( { 'factor' => '-9', 'from_unit' => 'g', 'to_unit' => 'ozs', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, undef, 'OK');
 
-$result = $c->convert( { 'factor' => 'Inf', 'fromUnit' => 'oz', 'toUnit' => 'stones', 'precision' => '3', } );
-is($result, undef, 'OK');
+$result = $c->convert( { 'factor' => '5', 'from_unit' => 'oz', 'to_unit' => 'yards', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, undef, 'OK');
 
-$result = $c->convert( { 'factor' => '-5', 'fromUnit' => 'kelvin', 'toUnit' => 'fahrenheit', 'precision' => '3', } );
-is($result, undef, 'OK');
+$result = $c->convert( { 'factor' => 'Inf', 'from_unit' => 'oz', 'to_unit' => 'stones', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, undef, 'OK');
 
-$result = $c->convert( { 'factor' => 'use', 'fromUnit' => 'ton', 'toUnit' => 'stones', 'precision' => '3', } );
-is($result, undef, 'OK');
+$result = $c->convert( { 'factor' => '-5', 'from_unit' => 'kelvin', 'to_unit' => 'fahrenheit', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, undef, 'OK');
 
-$result = $c->convert( { 'factor' => 'shoot', 'fromUnit' => 'oneself', 'toUnit' => 'foot', 'precision' => '3', } );
-is($result, undef, 'OK');
+$result = $c->convert( { 'factor' => 'use', 'from_unit' => 'ton', 'to_unit' => 'stones', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, undef, 'OK');
 
-$result = $c->convert( { 'factor' => 'foot', 'fromUnit' => 'both', 'toUnit' => 'camps', 'precision' => '3', } );
-is($result, undef, 'OK');
+$result = $c->convert( { 'factor' => 'shoot', 'from_unit' => 'oneself', 'to_unit' => 'foot', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, undef, 'OK');
 
-$result = $c->convert( { 'factor' => 'puff', 'fromUnit' => 'toke', 'toUnit' => 'kludge', 'precision' => '3', } );
-is($result, undef, 'OK');
+$result = $c->convert( { 'factor' => 'foot', 'from_unit' => 'both', 'to_unit' => 'camps', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, undef, 'OK');
+
+$result = $c->convert( { 'factor' => 'puff', 'from_unit' => 'toke', 'to_unit' => 'kludge', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, undef, 'OK');
     
-$result = $c->convert( { 'factor' => '10', 'fromUnit' => 'milligrams', 'toUnit' => 'tons', 'precision' => '3', } );
-is($result, '0.000', '10 milligrams is 1.1e-08 tons');
+$result = $c->convert( { 'factor' => '10', 'from_unit' => 'milligrams', 'to_unit' => 'tons', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '0.000', '10 milligrams is 1.1e-08 tons');
 
-$result = $c->convert( { 'factor' => '10000', 'fromUnit' => 'minutes', 'toUnit' => 'microseconds', 'precision' => '3', } );
-is($result, '600000000000.000', '10000 minutes is 6e+11 microseconds');
+$result = $c->convert( { 'factor' => '10000', 'from_unit' => 'minutes', 'to_unit' => 'microseconds', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '600000000000.000', '10000 minutes is 6e+11 microseconds');
 
-$result = $c->convert( { 'factor' => '5', 'fromUnit' => 'bytes', 'toUnit' => 'bit', 'precision' => '3', } );
-is($result, '40.000', '5 bytes is 40.000 bits');
+$result = $c->convert( { 'factor' => '5', 'from_unit' => 'bytes', 'to_unit' => 'bit', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '40.000', '5 bytes is 40.000 bits');
 
-$result = $c->convert( { 'factor' => '5', 'fromUnit' => 'GB', 'toUnit' => 'megabyte', 'precision' => '3', } );
-is($result, '5000.000', '5 gigabytes is 5000.000 megabytes');
+$result = $c->convert( { 'factor' => '5', 'from_unit' => 'GB', 'to_unit' => 'megabyte', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '5000.000', '5 gigabytes is 5000.000 megabytes');
 
-$result = $c->convert( { 'factor' => '0.013', 'fromUnit' => 'mb', 'toUnit' => 'bits', 'precision' => '3', } );
-is($result, '104000.000', '0.013 megabytes is 104000.000 bits');
+$result = $c->convert( { 'factor' => '0.013', 'from_unit' => 'mb', 'to_unit' => 'bits', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '104000.000', '0.013 megabytes is 104000.000 bits');
 
-$result = $c->convert( { 'factor' => '1', 'fromUnit' => 'exabyte', 'toUnit' => 'pib', 'precision' => '3', } );
-is($result, '888.178', '1 exabyte is 888.178 pebibytes');
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'exabyte', 'to_unit' => 'pib', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '888.178', '1 exabyte is 888.178 pebibytes');
 
-$result = $c->convert( { 'factor' => '1', 'fromUnit' => 'yb', 'toUnit' => 'yib', 'precision' => '3', } );
-is($result, '0.827', '1 yottabyte is 0.827 yobibytes');
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'yb', 'to_unit' => 'yib', 'precision' => $precision, } );
+###$result->{'result'} = nearest($nearest, $result->{'result'});
+is($result->{'result'}, '0.827', '1 yottabyte is 0.827 yobibytes');

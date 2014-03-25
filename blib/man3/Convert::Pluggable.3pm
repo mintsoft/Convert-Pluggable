@@ -124,7 +124,7 @@
 .\" ========================================================================
 .\"
 .IX Title "Convert::Pluggable 3"
-.TH Convert::Pluggable 3 "2014-03-23" "perl v5.14.2" "User Contributed Perl Documentation"
+.TH Convert::Pluggable 3 "2014-03-25" "perl v5.14.2" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -133,7 +133,7 @@
 Convert::Pluggable \- convert between various units of measurement
 .SH "VERSION"
 .IX Header "VERSION"
-Version 0.014
+Version 0.017
 .SH "SYNOPSIS"
 .IX Header "SYNOPSIS"
 convert between various units of measurement
@@ -142,7 +142,7 @@ convert between various units of measurement
 .PP
 \&\f(CW\*(C`...\*(C'\fR
 .PP
-\&\f(CW\*(C` my $result = $c\-\*(C'\fRconvert( { 'factor' => '5', 'fromUnit' => 'feet', 'toUnit' => 'inches', 'precision' => '3', } ); >
+\&\f(CW\*(C` my $result = $c\-\*(C'\fRconvert( { 'factor' => '5', 'from_unit' => 'feet', 'to_unit' => 'inches', 'precision' => '3', } ); >
 .PP
 will produce '60.000'.
 .PP
@@ -178,7 +178,7 @@ This gets some useful metadata for \fIconvert()\fR to carry out its work.
 .SS "\fIget_units()\fP"
 .IX Subsection "get_units()"
 This is where you add new unit types so that \fIconvert()\fR can operate on them.  Currently supported units of measurement
-are: mass, length, time, pressure, energy, power, angle, force, temperature.
+are: mass, length, time, pressure, energy, power, angle, force, temperature, digital.
 .SH "AUTHOR"
 .IX Header "AUTHOR"
 bradley andersen, \f(CW\*(C`<bradley at pvnp.us>\*(C'\fR
@@ -234,6 +234,8 @@ store units data in a file?
 add more unit types (digital, cooking, etc.)
 .IP "\(bu" 4
 add more tests and better test output
+.IP "\(bu" 4
+fix tests
 .IP "\(bu" 4
 fix this documentation!
 .IP "\(bu" 4
