@@ -124,7 +124,7 @@
 .\" ========================================================================
 .\"
 .IX Title "Convert::Pluggable 3"
-.TH Convert::Pluggable 3 "2014-03-25" "perl v5.14.2" "User Contributed Perl Documentation"
+.TH Convert::Pluggable 3 "2014-03-31" "perl v5.14.2" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -184,6 +184,12 @@ are: mass, length, time, pressure, energy, power, angle, force, temperature, dig
 bradley andersen, \f(CW\*(C`<bradley at pvnp.us>\*(C'\fR
 .SH "BUGS"
 .IX Header "BUGS"
+.IP "\(bu" 4
+Because of the base unit ('day'), time conversions are off:
+.Sp
+e.g.: '1 year to months' yields: '1 year is 11.999 months'
+.IP "\(bu" 4
+add back in guard against things like: '10 inches to 5 cm'
 .SH "SUPPORT"
 .IX Header "SUPPORT"
 You can find documentation for this module with the perldoc command.
@@ -210,9 +216,8 @@ Search \s-1CPAN\s0
 Special thanks to \f(CW@mintsoft\fR and \f(CW@jagtalon\fR
 .SH "LICENSE AND COPYRIGHT"
 .IX Header "LICENSE AND COPYRIGHT"
-Copyright 2014 bradley andersen.
-.PP
-No specific license yet.
+Copyright (c) 2014 Bradley Andersen. This program is free software; you can redistribute it and/or modify it under the
+same terms as Perl itself.
 .SH "PRIOR ART"
 .IX Header "PRIOR ART"
 Bot::BasicBot::Pluggable::Module::Convert
@@ -233,7 +238,23 @@ store units data in a file?
 .IP "\(bu" 4
 add more unit types (digital, cooking, etc.)
 .IP "\(bu" 4
+support native perl numbers in queries: e.g.: '12.34e\-56 cm to mm'
+.IP "\(bu" 4
+don't show decimals when integer answer? e.g.: '12.000' should be '12' (this may be something we leave to implementation)
+.IP "\(bu" 4
 add more tests and better test output
+.RS 4
+.IP "\(bu" 4
+\&'1 year to months'
+.IP "\(bu" 4
+\&'16 years to months'
+.IP "\(bu" 4
+\&'12.34e\-56 cm to mm'
+.IP "\(bu" 4
+\&'10 inches to 5 cm'
+.RE
+.RS 4
+.RE
 .IP "\(bu" 4
 fix tests
 .IP "\(bu" 4
