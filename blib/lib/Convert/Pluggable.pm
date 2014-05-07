@@ -11,7 +11,7 @@ use Exporter qw(import);
  
 our @EXPORT_OK = qw(convert get_units);
 
-our $VERSION = '0.017';
+our $VERSION = '0.020';
 
 sub new {
     my $class = shift;
@@ -65,9 +65,6 @@ sub get_matches {
     $matches[1] =~ s/"/inches/; 
     $matches[1] =~ s/'/feet/;
 
-    # often a choke point, so leaving this in:
-    #use Data::Dumper; print STDERR Dumper(\@matches);
-    
     my @match_types = ();
     my @factors = ();
     my @units = ();
@@ -240,7 +237,7 @@ sub get_units {
         {
             'unit'      => 'meter',
             'factor'    => '1',
-            'aliases'   => ['meters', 'metre', 'metres', 'm', 'ms'],
+            'aliases'   => ['meters', 'metre', 'metres', 'm'],
             'type'      => 'length',
         },
         {
@@ -1070,7 +1067,7 @@ Convert::Pluggable - convert between various units of measurement
 
 =head1 VERSION
 
-Version 0.017
+Version 0.020
 
 =head1 SYNOPSIS
 
@@ -1134,6 +1131,10 @@ This gets some useful metadata for convert() to carry out its work.
 
 This is where you add new unit types so that convert() can operate on them.  Currently supported units of measurement
 are: mass, length, time, pressure, energy, power, angle, force, temperature, digital. 
+
+=head2 parse_number()
+
+handle numbers with special characters in them, like '6^2' and '2e3'.
 
 =head1 AUTHOR
 
