@@ -103,9 +103,8 @@ sub get_matches {
 # thanks, @mwmiller!
 sub parse_number {
     my $in = shift;
-
+    
     my $out = ($in =~ /^(-?\d*(?:\.?\d+))\^(-?\d*(?:\.?\d+))$/) ? $1**$2 : $in;
-
     return 0 + $out;
 }
 
