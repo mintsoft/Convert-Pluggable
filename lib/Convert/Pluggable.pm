@@ -998,7 +998,7 @@ sub get_units {
         },
         {
             'unit'      => 'square centimeter',
-            'factor'    => 10_000_000,
+            'factor'    => 100_000_000,
             'aliases'   => ['square centimeters', 'square centimetre', 'square centimetres', 'cm^2', 'cm²'],
             'type'      => 'area',
         },
