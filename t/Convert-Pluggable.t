@@ -210,4 +210,28 @@ is($result->{'result'}, 180576.006990025, '1254 feet^2 is ~ 180576 inch^2');
 $result = $c->convert( { 'factor' => '125', 'from_unit' => 'yards^2', 'to_unit' => 'metres^2', 'precision' => $precision, } );
 is($result->{'result'}, 104.515924046188, '1254 feet^2 is ~ 180576 inch^2');
 
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'pint', 'to_unit' => 'ml', 'precision' => $precision, } );
+is($result->{'result'}, 568.26125, '1 fl oz is ~ 568 ml');
+
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'imperial gallon', 'to_unit' => 'l', 'precision' => $precision, } );
+is($result->{'result'}, 4.54609, '1 gallon is ~ 4.5 litres');
+
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'imperial gallon', 'to_unit' => 'pints', 'precision' => $precision, } );
+is($result->{'result'}, 8, '1 gallon  = 8 pints');
+
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'us gallon', 'to_unit' => 'us quarts', 'precision' => $precision, } );
+is($result->{'result'}, 4, '1 gallon  = 4 quarts');
+
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'us pints', 'to_unit' => 'us fluid ounces', 'precision' => $precision, } );
+is($result->{'result'}, 16, '1 us pint  = 16 us fluid oz');
+
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'us gallon', 'to_unit' => 'us fluid ounces', 'precision' => $precision, } );
+is($result->{'result'}, 16*8, '1 gallon  = 16*8');
+
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'imperial pints', 'to_unit' => 'imperial fluid ounces', 'precision' => $precision, } );
+is($result->{'result'}, 16, '1 imperial pint  = 16 imperial fluid oz');
+
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'imperial gallon', 'to_unit' => 'imperial fluid ounces', 'precision' => $precision, } );
+is($result->{'result'}, 16*8, '1 gallon  = 16*8');
+
 done_testing();
