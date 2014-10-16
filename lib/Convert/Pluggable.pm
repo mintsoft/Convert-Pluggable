@@ -1039,7 +1039,7 @@ sub get_units {
 		{
             'unit'      => 'litre',
             'factor'    => 1,
-            'aliases'   => ['liter', 'litres', 'liters', 'l'],
+            'aliases'   => ['liter', 'litres', 'liters', 'l', 'litter', 'litters'],
             'type'      => 'volume',
         },
 		{
