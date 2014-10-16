@@ -969,9 +969,73 @@ sub get_units {
             'type'            => 'digital',
         },
     );
+	
+	# hectare is base unit for area
+    my @area = (
+        {
+            'unit'      => 'hectare',
+            'factor'    => 1,
+            'aliases'   => ['hectares', 'ha'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'acre',
+            'factor'    => 2.4710439,
+            'aliases'   => ['acres'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'square meter',
+            'factor'    => 10_000,
+            'aliases'   => ['square meters', 'square metre', 'square metres', 'm^2', 'm²'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'square kilometer',
+            'factor'    => 100,
+            'aliases'   => ['square kilometers', 'square kilometre', 'square kilometres', 'km^2', 'km²'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'square centimeter',
+            'factor'    => 10_000_000,
+            'aliases'   => ['square centimeters', 'square centimetre', 'square centimetres', 'cm^2', 'cm²'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'square millimeter',
+            'factor'    => 10_000_000_000,
+            'aliases'   => ['square millimeters', 'square millimetre', 'square millimetres', 'mm^2', 'mm²'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'square mile',
+            'factor'    => 1/258.99881,
+            'aliases'   => ['square miles', 'square statute mile', 'square statute miles', 'square land mile', 'square land miles', 'miles^2', 'miles²'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'square yard',
+            'factor'    => 11959.9,
+            'aliases'   => ['square yards', 'yd^2', 'yd²', 'yrd^2', 'yrd²'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'square foot',
+            'factor'    => 107639.1,
+            'aliases'   => ['square feet', 'ft²', 'ft^2'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'square inch',
+            'factor'    => 15500031,
+            'aliases'   => ['square inches', 'squinch', 'in^2', 'in²'],
+            'type'      => 'area',
+        }
+    );
 
     # unit types available for conversion
-    my @types = (@mass, @length, @time, @pressure, @energy, @power, @angle, @force, @temperature, @digital);    
+    my @types = (@mass, @length, @area, @time, @pressure, @energy, @power, @angle, @force, @temperature, @digital);    
     
     return \@types;
 }
