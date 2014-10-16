@@ -1034,8 +1034,84 @@ sub get_units {
         }
     );
 
+	# litre is the base unit for volume
+	my @volume = (
+		{
+            'unit'      => 'litre',
+            'factor'    => 1,
+            'aliases'   => ['liter', 'litres', 'liters', 'l'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'millilitres',
+            'factor'    => 1000,
+            'aliases'   => ['liter', 'litres', 'liters', 'l'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'cubic metre',
+            'factor'    => 1/1000,
+            'aliases'   => ['metre^3', 'meter^3', 'metres^3', 'meters^3', 'm^3', 'm³'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'cubic centimetre',
+            'factor'    => 1000,
+            'aliases'   => ['centimetre^3', 'centimeter^3', 'centimetres^3', 'centimeters^3', 'cm^3', 'cm³'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'cubic millimetre',
+            'factor'    => 1_000_000,
+            'aliases'   => ['millimetre^3', 'millimeter^3', 'millimetres^3', 'millimeters^3', 'mm^3', 'mm³'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'liquid pint',
+            'factor'    => 1/473.176473,
+            'aliases'   => ['liquid pints'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'dry pint',
+            'factor'    => 1/550.6104713575,
+            'aliases'   => ['dry pints'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'pint',
+            'factor'    => 1/568.26125,
+            'aliases'   => ['pints', 'imperial pint', 'uk pint', 'british pint'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'imperial gallon',
+            'factor'    => 0.21996925,
+            'aliases'   => ['imperial gallon', 'uk gallon', 'british gallon', 'british gallons', 'uk gallons'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'quart',
+            'factor'    => 1.0566882,
+            'aliases'   => ['liquid quart'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'imperial fluid oz',
+            'factor'    => 28413.0625,
+            'aliases'   => ['fl oz'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'us fluid ounce',
+            'factor'    => 29573.5295625,
+            'aliases'   => ['fl oz'],
+            'type'      => 'volume',
+        },
+	);
+	
     # unit types available for conversion
-    my @types = (@mass, @length, @area, @time, @pressure, @energy, @power, @angle, @force, @temperature, @digital);    
+    my @types = (@mass, @length, @area, @volume, @time, @pressure, @energy, @power, @angle, @force, @temperature, @digital);    
     
     return \@types;
 }
