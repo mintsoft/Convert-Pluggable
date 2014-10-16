@@ -987,7 +987,7 @@ sub get_units {
         {
             'unit'      => 'square meter',
             'factor'    => 10_000,
-            'aliases'   => ['square meters', 'square metre', 'square metres', 'm^2', 'm²'],
+            'aliases'   => ['square meters', 'metre^2', 'meter^2', 'metres^2', 'meters^2', 'square metre', 'square metres', 'm^2', 'm²'],
             'type'      => 'area',
         },
         {
@@ -1017,19 +1017,19 @@ sub get_units {
         {
             'unit'      => 'square yard',
             'factor'    => 11959.9,
-            'aliases'   => ['square yards', 'yd^2', 'yd²', 'yrd^2', 'yrd²'],
+            'aliases'   => ['square yards', 'yard^2', 'yard²', 'yards²', 'yards^2', 'yd^2', 'yd²', 'yrd^2', 'yrd²'],
             'type'      => 'area',
         },
         {
             'unit'      => 'square foot',
             'factor'    => 107639.1,
-            'aliases'   => ['square feet', 'ft²', 'ft^2'],
+            'aliases'   => ['square feet', 'feet^2', 'feet²', 'foot^2', 'foot²', 'ft²', 'ft^2'],
             'type'      => 'area',
         },
         {
             'unit'      => 'square inch',
             'factor'    => 15500031,
-            'aliases'   => ['square inches', 'squinch', 'in^2', 'in²'],
+            'aliases'   => ['square inches', 'inch^2','inches^2', 'squinch', 'in^2', 'in²'],
             'type'      => 'area',
         }
     );

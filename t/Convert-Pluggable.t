@@ -191,6 +191,7 @@ is($result->{'result'}, 888.178419700125, '1 exabyte is 888.178 pebibytes');
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'yb', 'to_unit' => 'yib', 'precision' => $precision, } );
 is($result->{'result'}, 0.827180612553028, '1 yottabyte is 0.827 yobibytes');
 
+#areas
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'ha', 'to_unit' => 'acre', 'precision' => $precision, } );
 is($result->{'result'}, 2.4710439, '1 hectare is ~ 2.471 acres');
 
@@ -199,5 +200,14 @@ is($result->{'result'}, 0.01, '1 km^2 is 1/100 ha');
 
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'cm^2', 'to_unit' => 'square inches', 'precision' => $precision, } );
 is($result->{'result'}, 0.15500031, '1 cm^2 is ~ 0.155 inches^2');
+
+$result = $c->convert( { 'factor' => '1254', 'from_unit' => 'm^2', 'to_unit' => 'square miles', 'precision' => $precision, } );
+is($result->{'result'}, 0.000484172108744438, '1254 m^2 is ~ 0.00048417211 miles^2');
+
+$result = $c->convert( { 'factor' => '1254', 'from_unit' => 'feet^2', 'to_unit' => 'square inches', 'precision' => $precision, } );
+is($result->{'result'}, 180576.006990025, '1254 feet^2 is ~ 180576 inch^2');
+
+$result = $c->convert( { 'factor' => '125', 'from_unit' => 'yards^2', 'to_unit' => 'metres^2', 'precision' => $precision, } );
+is($result->{'result'}, 104.515924046188, '1254 feet^2 is ~ 180576 inch^2');
 
 done_testing();
