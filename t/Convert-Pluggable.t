@@ -1,12 +1,29 @@
 use Test::More;
 use Math::Round qw/nearest/;
 
+use Data::Dump qw/dump/;
+
 BEGIN { use_ok('Convert::Pluggable') };
 
 my $c = new Convert::Pluggable();
 isa_ok($c, 'Convert::Pluggable');
 
 my $result;
+
+
+# should get a list of all units:
+my $units_ref = $c->get_units();
+isa_ok($units_ref, 'ARRAY');
+my @units = @{$units_ref};
+
+my %singular_exceptions = qw(celsius);
+
+# all units should be singular:
+foreach(@units) {
+    my $unit = $_->{'unit'};
+    unlike($unit, qr/s$/, "$unit should be singular") unless (exists $singular_exceptions{$unit});
+}
+
 
 # fix precision and rounding:
 my $precision = 3;
