@@ -16,14 +16,12 @@ my $units_ref = $c->get_units();
 isa_ok($units_ref, 'ARRAY');
 my @units = @{$units_ref};
 
-my %singular_exceptions = qw(celsius);
-
 # all units should be singular:
+my %singular_exceptions = qw(celsius);
 foreach(@units) {
     my $unit = $_->{'unit'};
     unlike($unit, qr/s$/, "$unit should be singular") unless (exists $singular_exceptions{$unit});
 }
-
 
 # fix precision and rounding:
 my $precision = 3;
