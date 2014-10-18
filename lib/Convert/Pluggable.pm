@@ -1043,7 +1043,7 @@ sub get_units {
             'type'      => 'volume',
         },
 		{
-            'unit'      => 'millilitres',
+            'unit'      => 'millilitre',
             'factor'    => 1000,
             'aliases'   => ['milliliter', 'millilitres', 'milliliters', 'ml'],
             'type'      => 'volume',

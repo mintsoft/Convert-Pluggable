@@ -210,6 +210,7 @@ is($result->{'result'}, 180576.006990025, '1254 feet^2 is ~ 180576 inch^2');
 $result = $c->convert( { 'factor' => '125', 'from_unit' => 'yards^2', 'to_unit' => 'metres^2', 'precision' => $precision, } );
 is($result->{'result'}, 104.515924046188, '1254 feet^2 is ~ 180576 inch^2');
 
+#volumes
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'pint', 'to_unit' => 'ml', 'precision' => $precision, } );
 is($result->{'result'}, 568.26125, '1 fl oz is ~ 568 ml');
 
@@ -233,5 +234,8 @@ is($result->{'result'}, 16, '1 imperial pint  = 16 imperial fluid oz');
 
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'imperial gallon', 'to_unit' => 'imperial fluid ounces', 'precision' => $precision, } );
 is($result->{'result'}, 16*8, '1 gallon  = 16*8');
+
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'millilitre', 'to_unit' => 'imperial fluid ounces', 'precision' => $precision, } );
+is($result->{'result'}, 0.0281560637822832, '1 millilitre ~ 0.03 us fl oz');
 
 done_testing();
