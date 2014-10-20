@@ -1079,7 +1079,7 @@ sub get_units {
             'type'      => 'volume',
         },
 		{
-            'unit'      => 'imperial',
+            'unit'      => 'imperial pint',
             'factor'    => 1000/568.26125,
             'aliases'   => ['pints', 'pint', 'imperial pints', 'uk pint', 'british pint', 'pts'],
             'type'      => 'volume',
