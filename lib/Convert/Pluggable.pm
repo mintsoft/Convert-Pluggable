@@ -992,7 +992,7 @@ sub get_units {
         },
         {
             'unit'      => 'square kilometer',
-            'factor'    => 100,
+            'factor'    => 0.01,
             'aliases'   => ['square kilometers', 'square kilometre', 'square kilometres', 'km^2', 'km²'],
             'type'      => 'area',
         },
