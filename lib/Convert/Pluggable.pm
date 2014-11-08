@@ -1043,7 +1043,7 @@ sub get_units {
             'type'      => 'volume',
         },
 		{
-            'unit'      => 'millilitres',
+            'unit'      => 'millilitre',
             'factor'    => 1000,
             'aliases'   => ['milliliter', 'millilitres', 'milliliters', 'ml'],
             'type'      => 'volume',
@@ -1079,7 +1079,7 @@ sub get_units {
             'type'      => 'volume',
         },
 		{
-            'unit'      => 'imperial',
+            'unit'      => 'imperial pint',
             'factor'    => 1000/568.26125,
             'aliases'   => ['pints', 'pint', 'imperial pints', 'uk pint', 'british pint', 'pts'],
             'type'      => 'volume',
