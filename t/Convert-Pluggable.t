@@ -206,8 +206,8 @@ is($result->{'result'}, 0.827180612553028, '1 yottabyte is 0.827 yobibytes');
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'ha', 'to_unit' => 'acre', } );
 is($result->{'result'}, 2.4710439, '1 hectare is ~ 2.471 acres');
 
-$result = $c->convert( { 'factor' => '1', 'from_unit' => 'km^2', 'to_unit' => 'ha', } );
-is($result->{'result'}, 0.01, '1 km^2 is 1/100 ha');
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'km^2', 'to_unit' => 'ha', 'precision' => $precision, } );
+is($result->{'result'}, 100, '1 km^2 is 100 ha');
 
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'cm^2', 'to_unit' => 'square inches', } );
 is($result->{'result'}, 0.15500031, '1 cm^2 is ~ 0.155 inches^2');
@@ -248,5 +248,8 @@ is($result->{'result'}, 16*8, '1 gallon  = 16*8');
 
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'millilitre', 'to_unit' => 'imperial fluid ounces', } );
 is($result->{'result'}, 0.0281560637822832, '1 millilitre ~ 0.03 us fl oz');
+
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'ha', 'to_unit' => 'square kilometer', 'precision' => $precision, } );
+is($result->{'result'}, 0.01, '1 hectare is ~ 0.01 square kilometers');
 
 done_testing();
