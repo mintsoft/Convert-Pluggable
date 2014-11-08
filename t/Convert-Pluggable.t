@@ -196,7 +196,7 @@ $result = $c->convert( { 'factor' => '1', 'from_unit' => 'ha', 'to_unit' => 'acr
 is($result->{'result'}, 2.4710439, '1 hectare is ~ 2.471 acres');
 
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'km^2', 'to_unit' => 'ha', 'precision' => $precision, } );
-is($result->{'result'}, 0.01, '1 km^2 is 1/100 ha');
+is($result->{'result'}, 100, '1 km^2 is 100 ha');
 
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'cm^2', 'to_unit' => 'square inches', 'precision' => $precision, } );
 is($result->{'result'}, 0.15500031, '1 cm^2 is ~ 0.155 inches^2');
