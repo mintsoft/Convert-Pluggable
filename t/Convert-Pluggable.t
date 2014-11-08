@@ -234,4 +234,7 @@ is($result->{'result'}, 16, '1 imperial pint  = 16 imperial fluid oz');
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'imperial gallon', 'to_unit' => 'imperial fluid ounces', 'precision' => $precision, } );
 is($result->{'result'}, 16*8, '1 gallon  = 16*8');
 
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'ha', 'to_unit' => 'square kilometer', 'precision' => $precision, } );
+is($result->{'result'}, 0.01, '1 hectare is ~ 0.01 square kilometers');
+
 done_testing();
