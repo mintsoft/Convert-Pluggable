@@ -260,13 +260,13 @@ sub get_units {
         },
         {
             'unit'      => 'mile',
-            'factor'    => '0.000621371',
+            'factor'    => 1/1609.344,
             'aliases'   => ['miles', 'statute mile', 'statute miles', 'land mile', 'land miles'],
             'type'      => 'length',
         },
         {
             'unit'      => 'yard',
-            'factor'    => '1.09361',
+            'factor'    => '1.0936133',
             'aliases'   => ['yards', 'yd', 'yds', 'yrds'],
             'type'      => 'length',
         },

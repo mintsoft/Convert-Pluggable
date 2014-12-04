@@ -62,7 +62,7 @@ $result = $c->convert( { 'factor' => '3.9', 'from_unit' => 'oz', 'to_unit' => 'g
 is($result->{'result'}, '110.563020921925', 'OK');
 
 $result = $c->convert( { 'factor' => '2', 'from_unit' => 'miles', 'to_unit' => 'km', } );
-is($result->{'result'}, '3.21868899578513', 'OK');
+is($result->{'result'}, '3.218688', 'OK');
 
 $result = $c->convert( { 'factor' => '5', 'from_unit' => 'feet', 'to_unit' => 'in', } );
 is($result->{'result'}, '60.000030479999', 'OK');
@@ -71,16 +71,16 @@ $result = $c->convert( { 'factor' => '0.5', 'from_unit' => 'nautical mile', 'to_
 is($result->{'result'}, '0.925999662936123', 'OK');
 
 $result = $c->convert( { 'factor' => '500', 'from_unit' => 'miles', 'to_unit' => 'metres', } );
-is($result->{'result'}, '804672.248946282', 'OK');
+is($result->{'result'}, '804672', 'OK');
 
 $result = $c->convert( { 'factor' => '25', 'from_unit' => 'cm', 'to_unit' => 'inches', } );
 is($result->{'result'}, '9.842525', 'OK');
 
 $result = $c->convert( { 'factor' => '1760', 'from_unit' => 'yards', 'to_unit' => 'miles', } );
-is($result->{'result'}, '1.00000270663216', 'OK');
+is($result->{'result'}, '0.99999999848', 'OK');
 
 $result = $c->convert( { 'factor' => '3520', 'from_unit' => 'yards', 'to_unit' => 'miles', } );
-is($result->{'result'}, '2.00000541326433', 'OK');
+is($result->{'result'}, '1.99999999696', 'OK');
 
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'stone', 'to_unit' => 'lbs', } );
 is($result->{'result'}, '13.9999872994101', 'OK');
@@ -110,7 +110,7 @@ $result = $c->convert( { 'factor' => '1', 'from_unit' => 'atm', 'to_unit' => 'kp
 is($result->{'result'}, '101.325', 'OK');
 
 $result = $c->convert( { 'factor' => '5', 'from_unit' => 'yrds', 'to_unit' => 'km', } );
-is($result->{'result'}, '0.00457201378919359', 'OK');
+is($result->{'result'}, '0.00457199999305056', 'OK');
 
 $result = $c->convert( { 'factor' => '12', 'from_unit' => '"', 'to_unit' => 'cm', } );
 is($result->{'result'}, '30.4799835408089', 'OK');
@@ -251,5 +251,8 @@ is($result->{'result'}, 0.0281560637822832, '1 millilitre ~ 0.03 us fl oz');
 
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'ha', 'to_unit' => 'square kilometer', 'precision' => $precision, } );
 is($result->{'result'}, 0.01, '1 hectare is ~ 0.01 square kilometers');
+
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'mile', 'to_unit' => 'yards', 'precision' => $precision, } );
+is($result->{'result'}, 1760.0000026752, '1 mile is 1760 yards');
 
 done_testing();
