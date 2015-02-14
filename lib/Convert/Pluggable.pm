@@ -261,7 +261,7 @@ sub get_units {
         {
             'unit'      => 'mile',
             'factor'    => 1/1609.344,
-            'aliases'   => ['miles', 'statute mile', 'statute miles', 'land mile', 'land miles'],
+            'aliases'   => ['miles', 'statute mile', 'statute miles', 'land mile', 'land miles', 'mi'],
             'type'      => 'length',
         },
         {
@@ -1011,7 +1011,7 @@ sub get_units {
         {
             'unit'      => 'square mile',
             'factor'    => 1/258.99881,
-            'aliases'   => ['square miles', 'square statute mile', 'square statute miles', 'square land mile', 'square land miles', 'miles^2', 'miles²'],
+            'aliases'   => ['square miles', 'square statute mile', 'square statute miles', 'square land mile', 'square land miles', 'miles^2', 'miles²', 'sq mi'],
             'type'      => 'area',
         },
         {
