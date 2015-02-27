@@ -225,7 +225,7 @@ $result = $c->convert( { 'factor' => '1254', 'from_unit' => 'm^2', 'to_unit' => 
 is($result->{'result'}, 0.000484172108744438, '1254 m^2 is ~ 0.00048417211 miles^2');
 
 $result = $c->convert( { 'factor' => '125', 'from_unit' => 'yards^2', 'to_unit' => 'metres^2', } );
-is($result->{'result'}, 104.515924046188, '1254 feet^2 is ~ 180576 inch^2');
+is($result->{'result'}, 104.515924046188, '125 yards^2 is ~ 104.516 metres^2');
 
 #volumes
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'pint', 'to_unit' => 'ml', } );
