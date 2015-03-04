@@ -11,7 +11,7 @@ use Exporter qw(import);
  
 our @EXPORT_OK = qw(convert get_units);
 
-our $VERSION = '0.020';
+our $VERSION = '0.021';
 
 sub new {
     my $class = shift;
@@ -38,20 +38,20 @@ sub convert_temperatures {
     my $from = shift;
     my $to = shift;
     my $factor = shift;
-    
+   
     # convert $from to fahrenheit:
-    if    ($from =~ /fahrenheit|f/i) { $factor = $factor;                       }
-    elsif ($from =~ /celsius|c/i)    { $factor = ($factor * 1.8) + 32;          }
-    elsif ($from =~ /kelvin|k/i)     { $factor = 1.8 * ($factor - 273.15) + 32; }
-    elsif ($from =~ /rankine|r/i)    { $factor = $factor - 459.67;              }
-    else                             { $factor = ($factor * 2.25) + 32;         }    # reaumur 
+    if    ($from =~ /fahrenheit|f/i) { $factor = $factor;                           }
+    elsif ($from =~ /celsius|c/i)    { $factor = ($factor * (9 / 5)) + 32;          }
+    elsif ($from =~ /kelvin|k/i)     { $factor = (9 / 5) * ($factor - 273.15) + 32; }
+    elsif ($from =~ /rankine|r/i)    { $factor = $factor - 459.67;                  }
+    else                             { $factor = ($factor * (9 / 4)) + 32;          } 
     
     # convert fahrenheit $to:
-    if    ($to   =~ /fahrenheit|f/i) { $factor = $factor;                       }
-    elsif ($to   =~ /celsius|c/i)    { $factor = ($factor - 32) * 0.555;        }
-    elsif ($to   =~ /kelvin|k/i)     { $factor = ($factor + 459.67) * 0.555;    }
-    elsif ($to   =~ /rankine|r/i)    { $factor = $factor + 459.67;              }
-    else                             { $factor = ($factor - 32) * 0.444;        }    # reaumur 
+    if    ($to   =~ /fahrenheit|f/i) { $factor = $factor;                           }
+    elsif ($to   =~ /celsius|c/i)    { $factor = ($factor - 32) * (5 / 9);          }
+    elsif ($to   =~ /kelvin|k/i)     { $factor = ($factor + 459.67) * (5 / 9);      }
+    elsif ($to   =~ /rankine|r/i)    { $factor = $factor + 459.67;                  }
+    else                             { $factor = ($factor - 32) * (4 / 9);          }
 
     return $factor;
 }
@@ -201,25 +201,25 @@ sub get_units {
         },
         {
             'unit'    => 'microgram',
-            'factor'  => '1000000000',
+            'factor'  => 1_000_000_000_000,
             'aliases' => ['mcg', 'micrograms', 'mcgs'],
             'type'    => 'mass',
         },
         {
             'unit'    => 'kilogram',
-            'factor'  => '1000',
+            'factor'  => 1000,
             'aliases' => ['kg', 'kilo', 'kilogramme', 'kilograms', 'kgs', 'kilos', 'kilogrammes'],
             'type'    => 'mass',
         },
         {
             'unit'    => 'gram',
-            'factor'  => '1000000',
+            'factor'  => 1_000_000,
             'aliases' => ['g', 'gm', 'gramme', 'grams', 'gs', 'gms', 'grammes'],
             'type'    => 'mass',
         },
         {
             'unit'    => 'milligram',
-            'factor'  => '1000000000',
+            'factor'  => 1_000_000_000,
             'aliases' => ['mg', 'milligrams', 'mgs'],
             'type'    => 'mass',
         },
@@ -260,13 +260,13 @@ sub get_units {
         },
         {
             'unit'      => 'mile',
-            'factor'    => '0.000621371',
-            'aliases'   => ['miles', 'statute mile', 'statute miles', 'land mile', 'land miles'],
+            'factor'    => 1/1609.344,
+            'aliases'   => ['miles', 'statute mile', 'statute miles', 'land mile', 'land miles', 'mi'],
             'type'      => 'length',
         },
         {
             'unit'      => 'yard',
-            'factor'    => '1.09361',
+            'factor'    => '1.0936133',
             'aliases'   => ['yards', 'yd', 'yds', 'yrds'],
             'type'      => 'length',
         },
@@ -349,84 +349,6 @@ sub get_units {
             'type'      => 'length',
         },
     );
-
-###    # year is base unit for time
-###    # known SI units and aliases / plurals
-###    # used google's conversions
-###    my @time = (
-###        {
-###            'unit'      => 'day',
-###            'factor'    => '365.242',
-###            'aliases'   => ['days', 'dy', 'dys', 'd'],
-###            'type'      => 'duration',
-###        },
-###        {
-###            'unit'      => 'second',
-###            'factor'    => '3.156e+7',
-###            'aliases'   => ['seconds', 'sec', 's'],
-###            'type'      => 'duration',
-###        },
-###        {
-###            'unit'      => 'millisecond',
-###            'factor'    => '3.156e+10',
-###            'aliases'   => ['milliseconds', 'millisec', 'millisecs', 'ms'],
-###            'type'      => 'duration',
-###        },
-###        {
-###            'unit'      => 'microsecond',
-###            'factor'    => '3.156e+13',
-###            'aliases'   => ['microseconds', 'microsec', 'microsecs', 'us'],
-###            'type'      => 'duration',
-###        },
-###        {
-###            'unit'      => 'nanosecond',
-###            'factor'    => '3.156e+16',
-###            'aliases'   => ['nanoseconds', 'nanosec', 'nanosecs', 'ns'],
-###            'type'      => 'duration',
-###        },
-###        {
-###            'unit'      => 'minute',
-###            'factor'    => '525949',
-###            'aliases'   => ['minutes', 'min', 'mins'],
-###            'type'      => 'duration',
-###        },
-###        {
-###            'unit'      => 'hour',
-###            'factor'    => '8765.81',
-###            'aliases'   => ['hours', 'hr', 'hrs', 'h'],
-###            'type'      => 'duration',
-###        },
-###        {
-###            'unit'      => 'week',
-###            'factor'    => 52.1775,
-###            'aliases'   => ['weeks', 'wks', 'wk'],
-###            'type'      => 'duration',
-###        },
-###        {
-###            'unit'      => 'fortnight',
-###            'factor'    => 26.08875,
-###            'aliases'   => [],
-###            'type'      => 'duration',
-###        },
-###        {    
-###            'unit'      => 'month',
-###            'factor'    => 12,
-###            'aliases'   => ['months', 'mons', 'mns', 'mn'],
-###            'type'      => 'duration',
-###        },
-###        {
-###            'unit'      => 'year',
-###            'factor'    => 1,
-###            'aliases'   => ['years', 'yr', 'yrs'],
-###            'type'      => 'duration',
-###        },
-###        {
-###            'unit'      => 'leap year',
-###            'factor'    => 366,
-###            'aliases'   => ['leap years', 'leapyear', 'leapyr', 'leapyrs'],
-###            'type'      => 'duration',
-###        },
-###    );
 
     # day is base unit for time
     # known SI units and aliases / plurals
@@ -1047,9 +969,167 @@ sub get_units {
             'type'            => 'digital',
         },
     );
+	
+	# hectare is base unit for area
+    my @area = (
+        {
+            'unit'      => 'hectare',
+            'factor'    => 1,
+            'aliases'   => ['hectares', 'ha'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'acre',
+            'factor'    => 2.4710439,
+            'aliases'   => ['acres'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'square meter',
+            'factor'    => 10_000,
+            'aliases'   => ['square meters', 'metre^2', 'meter^2', 'metres^2', 'meters^2', 'square metre', 'square metres', 'm^2', 'm²'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'square kilometer',
+            'factor'    => 0.01,
+            'aliases'   => ['square kilometers', 'square kilometre', 'square kilometres', 'km^2', 'km²'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'square centimeter',
+            'factor'    => 100_000_000,
+            'aliases'   => ['square centimeters', 'square centimetre', 'square centimetres', 'cm^2', 'cm²'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'square millimeter',
+            'factor'    => 10_000_000_000,
+            'aliases'   => ['square millimeters', 'square millimetre', 'square millimetres', 'mm^2', 'mm²'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'square mile',
+            'factor'    => 1/258.99881,
+            'aliases'   => ['square miles', 'square statute mile', 'square statute miles', 'square land mile', 'square land miles', 'miles^2', 'miles²', 'sq mi'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'square yard',
+            'factor'    => 11959.9,
+            'aliases'   => ['square yards', 'yard^2', 'yard²', 'yards²', 'yards^2', 'yd^2', 'yd²', 'yrd^2', 'yrd²'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'square foot',
+            'factor'    => 107639.1,
+            'aliases'   => ['square feet', 'feet^2', 'feet²', 'foot^2', 'foot²', 'ft²', 'ft^2'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'square inch',
+            'factor'    => 15500031,
+            'aliases'   => ['square inches', 'inch^2','inches^2', 'squinch', 'in^2', 'in²'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'tsubo',
+            'factor'    => 3024.9863876,
+            'aliases'   => ['tsubos'],
+            'type'      => 'area',
+        }
+    );
 
+	# litre is the base unit for volume
+	my @volume = (
+		{
+            'unit'      => 'litre',
+            'factor'    => 1,
+            'aliases'   => ['liter', 'litres', 'liters', 'l', 'litter', 'litters'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'millilitre',
+            'factor'    => 1000,
+            'aliases'   => ['milliliter', 'millilitres', 'milliliters', 'ml'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'cubic metre',
+            'factor'    => 1/1000,
+            'aliases'   => ['metre^3', 'meter^3', 'metres^3', 'meters^3', 'm^3', 'm³'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'cubic centimetre',
+            'factor'    => 1000,
+            'aliases'   => ['centimetre^3', 'centimeter^3', 'centimetres^3', 'centimeters^3', 'cm^3', 'cm³'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'cubic millimetre',
+            'factor'    => 1_000_000,
+            'aliases'   => ['millimetre^3', 'millimeter^3', 'millimetres^3', 'millimeters^3', 'mm^3', 'mm³'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'liquid pint',
+            'factor'    => 1000/473.176473,
+            'aliases'   => ['liquid pints', 'us pints', 'us liquid pint', 'us liquid pints'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'dry pint',
+            'factor'    => 1000/550.6104713575,
+            'aliases'   => ['dry pints'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'imperial pint',
+            'factor'    => 1000/568.26125,
+            'aliases'   => ['pints', 'pint', 'imperial pints', 'uk pint', 'british pint', 'pts'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'imperial gallon',
+            'factor'    => 1/4.54609,
+            'aliases'   => ['imperial gallon', 'uk gallon', 'british gallon', 'british gallons', 'uk gallons'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'us gallon',
+            'factor'    => 1/3.785411784,
+            'aliases'   => ['fluid gallon', 'us fluid gallon',  'fluid gallons', 'us gallons', 'gallon', 'gallons'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'quart',
+            'factor'    => 1/0.946352946,
+            'aliases'   => ['liquid quart', 'us quart', 'us quarts', 'quarts', 'liquid quarts'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'imperial quart',
+            'factor'    => 4*1000/568.26125,
+            'aliases'   => ['imperial quarts', 'british quarts', 'british quart'],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'imperial fluid ounce',
+            'factor'    => 16*1000/568.26125,
+            'aliases'   => ['imperial fluid ounces', 'imperial fl oz', 'imperial fluid oz', ],
+            'type'      => 'volume',
+        },
+		{
+            'unit'      => 'us fluid ounce',
+            'factor'    => 16*1000/473.176473,
+            'aliases'   => ['us fluid ounces', 'us fl oz', 'fl oz', 'fl. oz', 'fluid oz'],
+            'type'      => 'volume',
+        },
+	);
+	
     # unit types available for conversion
-    my @types = (@mass, @length, @time, @pressure, @energy, @power, @angle, @force, @temperature, @digital);    
+    my @types = (@mass, @length, @area, @volume, @time, @pressure, @energy, @power, @angle, @force, @temperature, @digital);    
     
     return \@types;
 }
@@ -1067,7 +1147,7 @@ Convert::Pluggable - convert between various units of measurement
 
 =head1 VERSION
 
-Version 0.020
+Version 0.021
 
 =head1 SYNOPSIS
 
