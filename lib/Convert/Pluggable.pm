@@ -11,7 +11,7 @@ use Exporter qw(import);
  
 our @EXPORT_OK = qw(convert get_units);
 
-our $VERSION = '0.021';
+our $VERSION = '0.028';
 
 sub new {
     my $class = shift;
@@ -1147,7 +1147,7 @@ Convert::Pluggable - convert between various units of measurement
 
 =head1 VERSION
 
-Version 0.021
+Version 0.028
 
 =head1 SYNOPSIS
 
