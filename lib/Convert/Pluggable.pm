@@ -1031,6 +1031,12 @@ sub get_units {
             'factor'    => 15500031,
             'aliases'   => ['square inches', 'inch^2','inches^2', 'squinch', 'in^2', 'in²'],
             'type'      => 'area',
+        },
+        {
+            'unit'      => 'tsubo',
+            'factor'    => 3024.9863876,
+            'aliases'   => ['tsubos'],
+            'type'      => 'area',
         }
     );
 
