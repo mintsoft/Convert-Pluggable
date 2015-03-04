@@ -227,6 +227,9 @@ is($result->{'result'}, 0.000484172108744438, '1254 m^2 is ~ 0.00048417211 miles
 $result = $c->convert( { 'factor' => '125', 'from_unit' => 'yards^2', 'to_unit' => 'metres^2', } );
 is($result->{'result'}, 104.515924046188, '125 yards^2 is ~ 104.516 metres^2');
 
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'ha', 'to_unit' => 'tsubo', } );
+is($result->{'result'}, 3024.9863876, '1 hectare is ~ 3025 tsubo');
+
 #volumes
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'pint', 'to_unit' => 'ml', } );
 is($result->{'result'}, 568.26125, '1 fl oz is ~ 568 ml');
