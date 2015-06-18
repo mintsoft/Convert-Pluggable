@@ -258,6 +258,12 @@ is($result->{'result'}, 16*8, '1 gallon  = 16*8');
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'millilitre', 'to_unit' => 'imperial fluid ounces', } );
 is($result->{'result'}, 0.0281560637822832, '1 millilitre ~ 0.03 us fl oz');
 
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'millilitre', 'to_unit' => 'us cup', } );
+is($result->{'result'}, 0.0042267528, '1 millilitre = 0.004 us cups');
+
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'millilitre', 'to_unit' => 'metric cup', } );
+is($result->{'result'}, 0.004, '1 millilitre = 0.004 metric cups');
+
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'ha', 'to_unit' => 'square kilometer', 'precision' => $precision, } );
 is($result->{'result'}, 0.01, '1 hectare is ~ 0.01 square kilometers');
 
