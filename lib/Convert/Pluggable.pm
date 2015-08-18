@@ -11,7 +11,7 @@ use Exporter qw(import);
  
 our @EXPORT_OK = qw(convert get_units);
 
-our $VERSION = '0.021';
+our $VERSION = '0.028';
 
 sub new {
     my $class = shift;
@@ -261,7 +261,7 @@ sub get_units {
         {
             'unit'      => 'mile',
             'factor'    => 1/1609.344,
-            'aliases'   => ['miles', 'statute mile', 'statute miles', 'land mile', 'land miles'],
+            'aliases'   => ['miles', 'statute mile', 'statute miles', 'land mile', 'land miles', 'mi'],
             'type'      => 'length',
         },
         {
@@ -987,49 +987,55 @@ sub get_units {
         {
             'unit'      => 'square meter',
             'factor'    => 10_000,
-            'aliases'   => ['square meters', 'metre^2', 'meter^2', 'metres^2', 'meters^2', 'square metre', 'square metres', 'm^2', 'm²'],
+            'aliases'   => ['square meters', 'metre^2', 'meter^2', 'metres^2', 'meters^2', 'square metre', 'square metres', 'm^2', 'mï¿½'],
             'type'      => 'area',
         },
         {
             'unit'      => 'square kilometer',
             'factor'    => 0.01,
-            'aliases'   => ['square kilometers', 'square kilometre', 'square kilometres', 'km^2', 'km²'],
+            'aliases'   => ['square kilometers', 'square kilometre', 'square kilometres', 'km^2', 'kmï¿½'],
             'type'      => 'area',
         },
         {
             'unit'      => 'square centimeter',
             'factor'    => 100_000_000,
-            'aliases'   => ['square centimeters', 'square centimetre', 'square centimetres', 'cm^2', 'cm²'],
+            'aliases'   => ['square centimeters', 'square centimetre', 'square centimetres', 'cm^2', 'cmï¿½'],
             'type'      => 'area',
         },
         {
             'unit'      => 'square millimeter',
             'factor'    => 10_000_000_000,
-            'aliases'   => ['square millimeters', 'square millimetre', 'square millimetres', 'mm^2', 'mm²'],
+            'aliases'   => ['square millimeters', 'square millimetre', 'square millimetres', 'mm^2', 'mmï¿½'],
             'type'      => 'area',
         },
         {
             'unit'      => 'square mile',
             'factor'    => 1/258.99881,
-            'aliases'   => ['square miles', 'square statute mile', 'square statute miles', 'square land mile', 'square land miles', 'miles^2', 'miles²'],
+            'aliases'   => ['square miles', 'square statute mile', 'square statute miles', 'square land mile', 'square land miles', 'miles^2', 'milesï¿½', 'sq mi'],
             'type'      => 'area',
         },
         {
             'unit'      => 'square yard',
             'factor'    => 11959.9,
-            'aliases'   => ['square yards', 'yard^2', 'yard²', 'yards²', 'yards^2', 'yd^2', 'yd²', 'yrd^2', 'yrd²'],
+            'aliases'   => ['square yards', 'yard^2', 'yardï¿½', 'yardsï¿½', 'yards^2', 'yd^2', 'ydï¿½', 'yrd^2', 'yrdï¿½'],
             'type'      => 'area',
         },
         {
             'unit'      => 'square foot',
             'factor'    => 107639.1,
-            'aliases'   => ['square feet', 'feet^2', 'feet²', 'foot^2', 'foot²', 'ft²', 'ft^2'],
+            'aliases'   => ['square feet', 'feet^2', 'feetï¿½', 'foot^2', 'footï¿½', 'ftï¿½', 'ft^2'],
             'type'      => 'area',
         },
         {
             'unit'      => 'square inch',
             'factor'    => 15500031,
-            'aliases'   => ['square inches', 'inch^2','inches^2', 'squinch', 'in^2', 'in²'],
+            'aliases'   => ['square inches', 'inch^2','inches^2', 'squinch', 'in^2', 'inï¿½'],
+            'type'      => 'area',
+        },
+        {
+            'unit'      => 'tsubo',
+            'factor'    => 3024.9863876,
+            'aliases'   => ['tsubos'],
             'type'      => 'area',
         }
     );
@@ -1051,19 +1057,19 @@ sub get_units {
 		{
             'unit'      => 'cubic metre',
             'factor'    => 1/1000,
-            'aliases'   => ['metre^3', 'meter^3', 'metres^3', 'meters^3', 'm^3', 'm³'],
+            'aliases'   => ['metre^3', 'meter^3', 'metres^3', 'meters^3', 'm^3', 'mï¿½'],
             'type'      => 'volume',
         },
 		{
             'unit'      => 'cubic centimetre',
             'factor'    => 1000,
-            'aliases'   => ['centimetre^3', 'centimeter^3', 'centimetres^3', 'centimeters^3', 'cm^3', 'cm³'],
+            'aliases'   => ['centimetre^3', 'centimeter^3', 'centimetres^3', 'centimeters^3', 'cm^3', 'cmï¿½'],
             'type'      => 'volume',
         },
 		{
             'unit'      => 'cubic millimetre',
             'factor'    => 1_000_000,
-            'aliases'   => ['millimetre^3', 'millimeter^3', 'millimetres^3', 'millimeters^3', 'mm^3', 'mm³'],
+            'aliases'   => ['millimetre^3', 'millimeter^3', 'millimetres^3', 'millimeters^3', 'mm^3', 'mmï¿½'],
             'type'      => 'volume',
         },
 		{
@@ -1120,6 +1126,18 @@ sub get_units {
             'aliases'   => ['us fluid ounces', 'us fl oz', 'fl oz', 'fl. oz', 'fluid oz'],
             'type'      => 'volume',
         },
+        {
+            'unit'      => 'us cup',
+            'factor'    => 4.2267528,
+            'aliases'   => ['us cups', 'cups'],
+            'type'      => 'volume',
+        },
+        {
+            'unit'      => 'metric cup',
+            'factor'    => 4,
+            'aliases'   => ['metric cups'],
+            'type'      => 'volume',
+        },
 	);
 	
     # unit types available for conversion
@@ -1141,7 +1159,7 @@ Convert::Pluggable - convert between various units of measurement
 
 =head1 VERSION
 
-Version 0.021
+Version 0.028
 
 =head1 SYNOPSIS
 

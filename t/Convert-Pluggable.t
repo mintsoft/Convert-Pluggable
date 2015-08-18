@@ -67,6 +67,9 @@ is($result->{'result'}, '3.218688', 'OK');
 $result = $c->convert( { 'factor' => '5', 'from_unit' => 'feet', 'to_unit' => 'in', } );
 is($result->{'result'}, '60.000030479999', 'OK');
 
+$result = $c->convert( { 'factor' => '2', 'from_unit' => 'mi', 'to_unit' => 'km', } );
+is($result->{'result'}, '3.21868899578513', 'OK');
+
 $result = $c->convert( { 'factor' => '0.5', 'from_unit' => 'nautical mile', 'to_unit' => 'klick', } );
 is($result->{'result'}, '0.925999662936123', 'OK');
 
@@ -218,8 +221,14 @@ is($result->{'result'}, 0.000484172108744438, '1254 m^2 is ~ 0.00048417211 miles
 $result = $c->convert( { 'factor' => '1254', 'from_unit' => 'feet^2', 'to_unit' => 'square inches', } );
 is($result->{'result'}, 180576.006990025, '1254 feet^2 is ~ 180576 inch^2');
 
+$result = $c->convert( { 'factor' => '1254', 'from_unit' => 'm^2', 'to_unit' => 'sq mi', } );
+is($result->{'result'}, 0.000484172108744438, '1254 m^2 is ~ 0.00048417211 miles^2');
+
 $result = $c->convert( { 'factor' => '125', 'from_unit' => 'yards^2', 'to_unit' => 'metres^2', } );
-is($result->{'result'}, 104.515924046188, '1254 feet^2 is ~ 180576 inch^2');
+is($result->{'result'}, 104.515924046188, '125 yards^2 is ~ 104.516 metres^2');
+
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'ha', 'to_unit' => 'tsubo', } );
+is($result->{'result'}, 3024.9863876, '1 hectare is ~ 3025 tsubo');
 
 #volumes
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'pint', 'to_unit' => 'ml', } );
@@ -248,6 +257,12 @@ is($result->{'result'}, 16*8, '1 gallon  = 16*8');
 
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'millilitre', 'to_unit' => 'imperial fluid ounces', } );
 is($result->{'result'}, 0.0281560637822832, '1 millilitre ~ 0.03 us fl oz');
+
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'millilitre', 'to_unit' => 'us cup', } );
+is($result->{'result'}, 0.0042267528, '1 millilitre = 0.004 us cups');
+
+$result = $c->convert( { 'factor' => '1', 'from_unit' => 'millilitre', 'to_unit' => 'metric cup', } );
+is($result->{'result'}, 0.004, '1 millilitre = 0.004 metric cups');
 
 $result = $c->convert( { 'factor' => '1', 'from_unit' => 'ha', 'to_unit' => 'square kilometer', 'precision' => $precision, } );
 is($result->{'result'}, 0.01, '1 hectare is ~ 0.01 square kilometers');
